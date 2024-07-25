@@ -31,7 +31,7 @@ export const ToDoForm = ({ addTodo }) => {
         onChange={(e) => setDescription(e.target.value)}
       />
       <button type="submit" className={styles.todoBtn}>
-        Add Task
+        Adicionar Tarefa
       </button>
     </form>
   );

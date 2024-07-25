@@ -1,13 +1,22 @@
 .Todo {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  gap: 1rem;
+  align-items: baseline;
   background: var(--purple-500);
   color: var(--white);
   padding: 0.75rem 1rem;
   border-radius: 5px;
   margin-bottom: 1rem;  
   width: 100%;
+}
+
+.TodoTextBox {
+  word-break: break-all;  
+}
+
+.TodoIconsBox {
+  display: flex;
 }
 
 .incompleted {
