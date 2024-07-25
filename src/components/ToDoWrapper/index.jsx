@@ -8,6 +8,7 @@ uuidv4();
 
 export const ToDoWrapper = () => {
   const [todos, setTodos] = useState([]);
+  const [filterTasks, setFilterTasks] = useState('all')
 
   const addTodo = (title, description) => {
     setTodos([
@@ -50,11 +51,25 @@ export const ToDoWrapper = () => {
     );
   };
 
+  //Filtrar atividades
+  const filteredTodos = todos.filter((todo) => {
+    if (filterTasks === 'completed') return todo.completed
+    if (filterTasks === 'incomplete') return !todo.completed
+    return true
+  })
+
+  
+
   return (
     <div className={styles.wrapper}>
       <h1>Atividades</h1>
       <ToDoForm addTodo={addTodo} />
-      {todos.map((todo, index) =>
+      <div className={styles.filterButtons}>
+        <button onClick={() => setFilterTasks("all")}>Todas</button>
+        <button onClick={() => setFilterTasks("incomplete")}>Pendentes</button>
+        <button onClick={() => setFilterTasks("completed")}>Concluídas</button>
+      </div>
+      {filteredTodos.map((todo, index) =>
         todo.isEditing ? (
           <EditToDoForm editTodo={editTask} task={todo} key={index} />
         ) : (
