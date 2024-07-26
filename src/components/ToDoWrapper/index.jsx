@@ -16,7 +16,7 @@ export const ToDoWrapper = () => {
       {
         id: uuidv4(),
         title: title,
-        description: description ? description : "",
+        description: description ?? "",
         completed: false,
         isEditing: false,
       },
