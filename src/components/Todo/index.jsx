@@ -16,11 +16,21 @@ export const Todo = ({ todo, toggleComplete, deleteTodo, editTodo }) => {
       >
         <h2>{todo.title}</h2>
         <p>{todo.description}</p>
+        <span className={styles.tooltiptext}>Clique e mude status</span>
       </div>
       <div className={styles.TodoIconsBox}>
-        <FontAwesomeIcon className={styles.editIcon} icon={faPenToSquare} onClick={() => editTodo(todo.id)} />
-        <FontAwesomeIcon className={styles.deleteIcon} icon={faTrash} onClick={() => deleteTodo(todo.id)}/>
+        <FontAwesomeIcon
+          className={styles.editIcon}
+          icon={faPenToSquare}
+          onClick={() => editTodo(todo.id)}
+        />
+        <FontAwesomeIcon
+          className={styles.deleteIcon}
+          icon={faTrash}
+          onClick={() => deleteTodo(todo.id)}
+        />
       </div>
+      
     </div>
   );
 };
