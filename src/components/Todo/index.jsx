@@ -1,6 +1,10 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
+import {
+  faPenToSquare,
+  faSquare,
+  faSquareCheck,
+} from "@fortawesome/free-regular-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./Todo.module.css";
@@ -16,9 +20,22 @@ export const Todo = ({ todo, toggleComplete, deleteTodo, editTodo }) => {
       >
         <h2>{todo.title}</h2>
         <p>{todo.description}</p>
-        <span className={styles.tooltiptext}>Clique e mude status</span>
       </div>
       <div className={styles.TodoIconsBox}>
+        {todo.completed ? (
+          <FontAwesomeIcon
+            className={styles.editIcon}
+            icon={faSquareCheck}
+            onClick={() => toggleComplete(todo.id)}
+          />
+        ) : (
+          <FontAwesomeIcon
+            className={styles.editIcon}
+            icon={faSquare}
+            onClick={() => toggleComplete(todo.id)}
+          />
+        )}
+
         <FontAwesomeIcon
           className={styles.editIcon}
           icon={faPenToSquare}
@@ -30,7 +47,6 @@ export const Todo = ({ todo, toggleComplete, deleteTodo, editTodo }) => {
           onClick={() => deleteTodo(todo.id)}
         />
       </div>
-      
     </div>
   );
 };
