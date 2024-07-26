@@ -9,6 +9,21 @@
   border-radius: 5px;
   margin-bottom: 1rem;  
   width: 100%;
+
+  transition: .3s ease;
+}
+
+.Todo:hover {
+  box-shadow:
+  1px 1px var(--purple-200),
+  2px 2px var(--purple-200),
+  3px 3px var(--purple-200),
+  4px 4px var(--purple-200),
+  5px 5px var(--purple-200),
+  6px 6px var(--purple-200);
+  -webkit-transform: translateX(-3px);
+  transform: translateX(-3px);
+  transition: .3s ease;
 }
 
 .TodoTextBox {
