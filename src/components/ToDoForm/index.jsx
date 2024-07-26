@@ -1,17 +1,25 @@
 import React, {useState} from "react";
+import { useDispatch } from 'react-redux';
+import { addTodo } from '../../features/todoSlice';
+
 import styles from "./ToDoForm.module.css";
 
-export const ToDoForm = ({ addTodo }) => {
+export const ToDoForm = () => {
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("")
+  const [description, setDescription] = useState("");
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    addTodo(title, description);
-
-    setTitle("")
-    setDescription("")
+    if (title.trim()) {
+      dispatch(addTodo({
+        id: Date.now(),
+        title,
+        description
+      }));
+      setTitle('');
+      setDescription('');
+    }
   };
 
   return (

@@ -1,57 +1,46 @@
-import React, { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import { ToDoForm } from "../ToDoForm";
-import { v4 as uuidv4 } from "uuid";
 import { Todo } from "../Todo";
 import { EditToDoForm } from "../EditToDoForm";
+import { v4 as uuidv4 } from "uuid";
+import { addTodo, toggleComplete, deleteTodo, toggleEdit, editTodo, setFilterTasks, setSearchTerm } from '../../features/todoSlice';
+
 import styles from "./ToDoWrapper.module.css";
 uuidv4();
 
 export const ToDoWrapper = () => {
-  const [todos, setTodos] = useState([]);
-  const [filterTasks, setFilterTasks] = useState("all");
-  const [searchTerm, setSearchTerm] = useState("");
+  const dispatch  = useDispatch();
+  const todos = useSelector(state => state.todos.todos);
+  const filterTasks = useSelector(state => state.todos.filterTasks);
+  const searchTerm = useSelector(state => state.todos.searchTerm);
+  
 
-  const addTodo = (title, description) => {
-    setTodos([
-      {
-        id: uuidv4(),
-        title: title,
-        description: description ? description : "",
-        completed: false,
-        isEditing: false,
-      },
-      ...todos,
-    ]);
+  const handleAddTodo = (title, description) => {
+    dispatch(addTodo({
+      id: uuidv4(),
+      title,
+      description
+    }));
   };
 
-  const toggleComplete = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
+  const handleToggleComplete = (id) => {
+    dispatch(toggleComplete(id));
   };
 
-  const deleteTodo = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+  const handleDeleteTodo = (id) => {
+    dispatch(deleteTodo(id));
   };
 
-  const editTodo = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
-      )
-    );
+  const handleToggleEdit = (id) => {
+    dispatch(toggleEdit(id));
   };
 
-  const editTask = (title, description, id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id
-          ? { ...todo, title, description, isEditing: !todo.isEditing }
-          : todo
-      )
-    );
+  const handleEditTodo = (title, description, id) => {
+    dispatch(editTodo({
+      id,
+      title,
+      description
+    }));
   };
 
   const filteredTodos = () => {
@@ -71,30 +60,30 @@ export const ToDoWrapper = () => {
   return (
     <div className={styles.wrapper}>
       <h1>Atividades</h1>
-      <ToDoForm addTodo={addTodo} />
+      <ToDoForm addTodo={handleAddTodo} />
       <div className={styles.filterButtons}>
-        <button onClick={() => setFilterTasks("all")}>Todas</button>
-        <button onClick={() => setFilterTasks("incomplete")}>Pendentes</button>
-        <button onClick={() => setFilterTasks("completed")}>Concluídas</button>
+        <button onClick={() => dispatch(setFilterTasks("all"))}>Todas</button>
+        <button onClick={() => dispatch(setFilterTasks("incomplete"))}>Pendentes</button>
+        <button onClick={() => dispatch(setFilterTasks("completed"))}>Concluídas</button>
       </div>
       <input
         type="text"
         className={styles.searchInput}
         placeholder="Pesquisar por título..."
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={(e) => dispatch(setSearchTerm(e.target.value))}
       />
       <div className={styles.tasksContainer}>
         {filteredTodos().map((todo, index) =>
           todo.isEditing ? (
-            <EditToDoForm editTodo={editTask} task={todo} key={index} />
+            <EditToDoForm editTodo={handleEditTodo} task={todo} key={index} />
           ) : (
             <Todo
               todo={todo}
               key={index}
-              toggleComplete={toggleComplete}
-              deleteTodo={deleteTodo}
-              editTodo={editTodo}
+              toggleComplete={handleToggleComplete}
+              deleteTodo={handleDeleteTodo }
+              editTodo={handleToggleEdit}
             />
           )
         )}
