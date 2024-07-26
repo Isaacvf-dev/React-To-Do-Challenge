@@ -22,6 +22,7 @@ export const ToDoForm = ({ addTodo }) => {
         value={title}
         placeholder="Qual a missão de hoje?"
         onChange={(e) => setTitle(e.target.value)}
+        required
       />
       <input
         type="text"
