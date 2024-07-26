@@ -36,11 +36,29 @@
   background-image: none;
   background-color: var(--blue-300);
 }
+
+.searchInput {  
+  margin-bottom: 1rem;  
+  width: 100%;
+  border: 1px solid var(--purple-500);
+  outline-color: var(--purple-500);
+  border-radius: 0.25rem;  
+  padding: 0.5rem 1rem;
+}
+
 @media (max-width: 768px) {
   html {
     font-size: 87.5%;
   }
   .wrapper {
     width: 20rem;
-  }  
+  }
+  
+  .filterButtons {    
+    gap: 0.2rem;    
+  }
+
+  .filterButtons button {
+    padding: 0.25rem 0.5rem;
+  }
 }

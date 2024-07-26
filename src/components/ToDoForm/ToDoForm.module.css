@@ -7,14 +7,9 @@
 }
 .todoInput {  
   border: 1px solid var(--purple-500);
-  outline: none;
-  background: transparent;
-  color: var(--white);
+  outline-color: var(--purple-500);
+  border-radius: 0.25rem;  
   padding: 0.5rem 1rem;  
-}
-
-.todoInput::placeholder {
-  color: var(--gray-400);
 }
 
 .todoBtn {
@@ -23,5 +18,6 @@
   border: none;
   padding: 0.55rem;
   cursor: pointer;
+  border-radius: 0.25rem;
 }
 

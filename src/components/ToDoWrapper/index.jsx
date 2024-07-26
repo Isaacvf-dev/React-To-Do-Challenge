@@ -8,7 +8,8 @@ uuidv4();
 
 export const ToDoWrapper = () => {
   const [todos, setTodos] = useState([]);
-  const [filterTasks, setFilterTasks] = useState('all')
+  const [filterTasks, setFilterTasks] = useState('all');
+  const [searchTerm, setSearchTerm] = useState("");
 
   const addTodo = (title, description) => {
     setTodos([
@@ -51,12 +52,20 @@ export const ToDoWrapper = () => {
     );
   };
 
-  //Filtrar atividades
-  const filteredTodos = todos.filter((todo) => {
-    if (filterTasks === 'completed') return todo.completed
-    if (filterTasks === 'incomplete') return !todo.completed
-    return true
-  })
+  const filteredTodos = () => {
+    //Filtrar por status
+    const filteredByStatus = todos.filter((todo) => {
+      if (filterTasks === 'completed') return todo.completed
+      if (filterTasks === 'incomplete') return !todo.completed
+      return true      
+    })
+
+    // Filtrar por texto
+    return filteredByStatus.filter((todo) =>
+      todo.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+  }
 
   
 
@@ -69,7 +78,14 @@ export const ToDoWrapper = () => {
         <button onClick={() => setFilterTasks("incomplete")}>Pendentes</button>
         <button onClick={() => setFilterTasks("completed")}>Concluídas</button>
       </div>
-      {filteredTodos.map((todo, index) =>
+      <input
+        type="text"
+        className={styles.searchInput}
+        placeholder="Pesquisar por título..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+      {filteredTodos().map((todo, index) =>
         todo.isEditing ? (
           <EditToDoForm editTodo={editTask} task={todo} key={index} />
         ) : (
