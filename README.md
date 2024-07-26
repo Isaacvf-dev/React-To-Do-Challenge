@@ -68,3 +68,33 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Screenshot
+
+![image](https://github.com/user-attachments/assets/1c138b0e-8081-4399-a6b6-beced369ed0a)
+
+### Links
+
+- Live Site URL: [@Netlify](https://my-to-do-challenge.netlify.app)
+- Repo URL: [@GitHub](https://github.com/Isaacvf-dev/react-to-do-challenge)
+
+### Built with
+
+- HTML
+- CSS 
+- React.JS
+
+## Author
+
+<table>
+  <tr>    
+    <td align="center">
+      <a href="https://github.com/Isaacvf-dev">
+        <img src="https://avatars.githubusercontent.com/u/123469000?v=4" width="100px;" alt="Foto do Isaac Vieira no GitHub"/><br>
+        <sub>
+          <b>Isaac Vieira</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
