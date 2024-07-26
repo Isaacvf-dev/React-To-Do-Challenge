@@ -8,7 +8,7 @@ uuidv4();
 
 export const ToDoWrapper = () => {
   const [todos, setTodos] = useState([]);
-  const [filterTasks, setFilterTasks] = useState('all');
+  const [filterTasks, setFilterTasks] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
 
   const addTodo = (title, description) => {
@@ -47,7 +47,9 @@ export const ToDoWrapper = () => {
   const editTask = (title, description, id) => {
     setTodos(
       todos.map((todo) =>
-        todo.id === id ? { ...todo, title, description, isEditing: !todo.isEditing } : todo
+        todo.id === id
+          ? { ...todo, title, description, isEditing: !todo.isEditing }
+          : todo
       )
     );
   };
@@ -55,19 +57,16 @@ export const ToDoWrapper = () => {
   const filteredTodos = () => {
     //Filtrar por status
     const filteredByStatus = todos.filter((todo) => {
-      if (filterTasks === 'completed') return todo.completed
-      if (filterTasks === 'incomplete') return !todo.completed
-      return true      
-    })
+      if (filterTasks === "completed") return todo.completed;
+      if (filterTasks === "incomplete") return !todo.completed;
+      return true;
+    });
 
     // Filtrar por texto
     return filteredByStatus.filter((todo) =>
       todo.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
-
-  }
-
-  
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -85,19 +84,21 @@ export const ToDoWrapper = () => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      {filteredTodos().map((todo, index) =>
-        todo.isEditing ? (
-          <EditToDoForm editTodo={editTask} task={todo} key={index} />
-        ) : (
-          <Todo
-            todo={todo}
-            key={index}
-            toggleComplete={toggleComplete}
-            deleteTodo={deleteTodo}
-            editTodo={editTodo}
-          />
-        )
-      )}
+      <div className={styles.tasksContainer}>
+        {filteredTodos().map((todo, index) =>
+          todo.isEditing ? (
+            <EditToDoForm editTodo={editTask} task={todo} key={index} />
+          ) : (
+            <Todo
+              todo={todo}
+              key={index}
+              toggleComplete={toggleComplete}
+              deleteTodo={deleteTodo}
+              editTodo={editTodo}
+            />
+          )
+        )}
+      </div>
     </div>
   );
 };
