@@ -24,13 +24,13 @@ export const Todo = ({ todo, toggleComplete, deleteTodo, editTodo }) => {
       <div className={styles.TodoIconsBox}>
         {todo.completed ? (
           <FontAwesomeIcon
-            className={styles.editIcon}
+            className={styles.statusIcon}
             icon={faSquareCheck}
             onClick={() => toggleComplete(todo.id)}
           />
         ) : (
           <FontAwesomeIcon
-            className={styles.editIcon}
+            className={styles.statusIcon}
             icon={faSquare}
             onClick={() => toggleComplete(todo.id)}
           />
