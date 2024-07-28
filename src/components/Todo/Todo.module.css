@@ -43,7 +43,19 @@
 }
 
 .editIcon,
-.deleteIcon {
-  cursor: pointer;
+.deleteIcon {  
   margin-left: 0.75rem;
+}
+
+.editIcon,
+.deleteIcon,
+.statusIcon {
+  cursor: pointer;
+  transition: .3s ease;
+}
+
+.editIcon:hover,
+.deleteIcon:hover,
+.statusIcon:hover {
+  color: var(--blue-200)
 }
